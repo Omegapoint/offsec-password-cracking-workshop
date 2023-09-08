@@ -21,7 +21,9 @@ There are 10000 MD5 hashes in the file `hashes.txt`
 
 Crack as many hashes as possible
 
-The cracked passwords will be stored in `hashcat.potfile`
+The cracked passwords will be stored in `hashcat.potfile` 
+
+MacOS: `/opt/homebrew/Cellar/hashcat/6.2.6_1/share/hashcat/hashcat.potfile`
 
 Good luck!
 
