@@ -1,12 +1,12 @@
 import hashlib
 import argparse
 
-def generate_md5_hash(password):
-    return hashlib.md5(password.encode('utf-8')).hexdigest()
+def generate_md5_hash(data):
+    return hashlib.md5(data).hexdigest()
 
 def main(input_file):
     try:
-        with open(input_file, "r") as file:
+        with open(input_file, "rb") as file:
             passwords = file.readlines()
     except FileNotFoundError:
         print(f"File '{input_file}' not found.")
