@@ -27,7 +27,7 @@ MacOS: `/opt/homebrew/Cellar/hashcat/6.2.6_1/share/hashcat/hashcat.potfile`
 
 Good luck!
 
-## Sample commands
+## Sample Commands
 
 Dictionary attack
 ```bash
@@ -63,3 +63,107 @@ hashcat -m 0 -a 3 hashes.txt ?d?d?d?d?d?d?d?d
 | Generate 8 chars end digit  | 1000   |
 | Name + year                 | 500    |
 
+### Generation Instructions
+
+- Rockyou (1000)
+
+```bash
+shuf -n 1000 /usr/share/wordlists/rockyou.txt > 1000-rockyou.txt
+```
+
+- Rockyou passwords with d3ad0ne rule (500)
+
+```bash
+shuf -n 500 /usr/share/wordlists/rockyou.txt | hashcat --force -r /usr/share/hashcat/rules/d3ad0ne.rule --stdout | shuf -n 500 > 500-rockyou-d3ad0ne.txt
+```
+
+- Rockyou passwords with best64 rule (500)
+
+```bash
+shuf -n 500 /usr/share/wordlists/rockyou.txt | hashcat --force -r /usr/share/hashcat/rules/best64.rule --stdout | shuf -n 500 > 500-rockyou-best64.txt
+```
+
+- Keyboard walks (500)
+
+```bash
+/opt/kwprocessor/kwp /opt/kwprocessor/basechars/full.base /opt/kwprocessor/keymaps/en-us.keymap /opt/kwprocessor/routes/2-to-16-max-3-direction-changes.route -z | shuf -n 100 > 500-kwp.txt
+
+/opt/kwprocessor/kwp /opt/kwprocessor/basechars/full.base /opt/kwprocessor/keymaps/sv.keymap /opt/kwprocessor/routes/2-to-16-max-3-direction-changes.route -z | shuf -n 100 >> 500-kwp.txt
+
+/opt/kwprocessor/kwp /opt/kwprocessor/basechars/full.base /opt/kwprocessor/keymaps/en-us.keymap /opt/kwprocessor/routes/2-to-16-max-3-direction-changes.route | shuf -n 100 >> 500-kwp.txt
+
+/opt/kwprocessor/kwp /opt/kwprocessor/basechars/full.base /opt/kwprocessor/keymaps/sv.keymap /opt/kwprocessor/routes/2-to-16-max-3-direction-changes.route | shuf -n 100 >> 500-kwp.txt
+
+/opt/kwprocessor/kwp /opt/kwprocessor/basechars/full.base /opt/kwprocessor/keymaps/dvorak.keymap /opt/kwprocessor/routes/2-to-16-max-3-direction-changes.route | shuf -n 100 >> 500-kwp.txt
+```
+
+- Easy passwords (500)
+
+```bash
+cat /usr/share/wordlists/SecLists/Passwords/darkweb2017-top10000.txt | shuf -n 500 > 500-easy.txt
+```
+
+- Swedish passwords with rules (1000)
+
+```bash
+Förnamn
+Efternamn
+Artister
+Orter
+Husdjursnamn
+Svordommar
+
+cat swedishwords.txt |  hashcat --force -r /opt/homebrew/Cellar/hashcat/6.2.6_1/share/doc/hashcat/rules/best64.rule --stdout | uniq | grep -vwE '\w{1,5}' | shuf -n 1000 > 1000-swedish-generated-best64.txt
+```
+
+- Swedish wordlist (500) [https://github.com/almgru/svenska-ord.txt](https://github.com/almgru/svenska-ord.txt)
+
+```bash
+cat svenska-ord.txt | shuf -n 500 > ../password-cracking-workshop/500-swedish.txt
+```
+
+- English wordlist (500)
+
+```bash
+cat words_alpha.txt | shuf -n 500 > ../password-cracking-workshop/500-english.txt
+```
+
+Number passwords up to 12 digits (500)
+
+```bash
+shuf -i 10000000-99999999 -n 100 > 500-numbers.txt
+shuf -i 100000000-999999999 -n 100 >> 500-numbers.txt
+shuf -i 1000000000-9999999999 -n 100 >> 500-numbers.txt
+shuf -i 10000000000-99999999999 -n 100 >> 500-numbers.txt
+shuf -i 100000000000-999999999999 -n 100 >> 500-numbers.txt
+```
+
+- Cewl from [omegapoint.se](http://omegapoint.se) (1000)
+
+```bash
+cewl -d 2 -m 8 https://omegapoint.se | shuf -n 1000 > 1000-omegapoint.txt
+```
+
+- Real Swedish passwords (1000)
+
+```bash
+From real password dumps
+```
+
+- Regular passwords with some standard rules (2000)
+
+```bash
+8 characters
+Starts with uppercase
+Ends with digits and symbol
+
+OR
+
+Ends with symbol and digit
+```
+
+- Name + Year
+
+```bash
+cat fornamn.txt efternamn.txt | while read line; do a=$((RANDOM%90+10));echo ${line}19$a; done | awk '{print toupper(substr($0, 1, 1)) tolower(substr($0, 2))}' | shuf -n 500 > 500-names-years.txt
+```
