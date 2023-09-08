@@ -31,16 +31,16 @@ Good luck!
 
 Dictionary attack
 ```bash
-hashcat -m 0 –a 0 hashes.txt svenska-ord.txt
+hashcat -m 0 -a 0 hashes.txt svenska-ord.txt
 ```
 
 Dictionary attack with rules
 ```bash
-hashcat -m 0 –a 0 hashes.txt svenska-ord.txt –r d3adhob0.rule
+hashcat -m 0 -a 0 hashes.txt svenska-ord.txt -r d3adhob0.rule
 ```
 
 Bruteforce attack (mask)
 ```bash
-hashcat -m 0 –a 3 hashes.txt ?d?d?d?d?d?d?d?d
+hashcat -m 0 -a 3 hashes.txt ?d?d?d?d?d?d?d?d
 ```
 
