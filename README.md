@@ -24,3 +24,21 @@ Crack as many hashes as possible
 The cracked passwords will be stored in `hashcat.potfile`
 
 Good luck!
+
+## Sample commands
+
+Dictionary attack
+```bash
+hashcat -m 0 –a 0 hashes.txt svenska-ord.txt
+```
+
+Dictionary attack with rules
+```bash
+hashcat -m 0 –a 0 hashes.txt svenska-ord.txt –r d3adhob0.rule
+```
+
+Bruteforce attack (mask)
+```bash
+hashcat -m 0 –a 3 hashes.txt ?d?d?d?d?d?d?d?d
+```
+
