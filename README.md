@@ -1,6 +1,10 @@
 # Password Cracking Workshop
 Password cracking workshop for kompetensdag 2023-09-08
 
+[Powerpoint](https://omegapointcloud-my.sharepoint.com/:p:/g/personal/davis_freimanis_omegapoint_se/ER_eqD61-25Fo9perRFmAIQBQnRQZOgK4BNh7jphftneUg?e=z66bpo)
+
+`#kompetensdag-password-cracking`
+
 ## Requirements
 Download and install `hashcat` [https://hashcat.net/hashcat/](https://hashcat.net/hashcat/)
 
